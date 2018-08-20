@@ -23,7 +23,7 @@ def generateRap(model, inputStr, lengthToGenerate):
 		outputOneHot = model.predict(inputOneHot)
 		outputIdx = np.argmax(outputOneHot)
 		listInputIdx.append(outputIdx)
-		listInputIdx = listInputIdx[:-1]#update the input for the next iteration
+		listInputIdx = listInputIdx[1:]#update the input for the next iteration
 		outputChar = ''
 		for key, val in dictStr.items():
 			if val == outputIdx:
@@ -45,6 +45,8 @@ N_UNIQUE_CHARS = len(dictStr)
 # 	pickle.dump(dictStr, f, pickle.HIGHEST_PROTOCOL)
 # print "Dictionary Pickled!"
 
+# print generateRap(load_model('model-iValue-5.h5'), 'yeezy taug', 20)
+# exit()
 for c in list(allData):
 	listDataIdx.append(dictStr[c]) #generate a list of all character indices in order of the lyrics
 for i in range(len(listDataIdx) - INPUT_LENGTH):
